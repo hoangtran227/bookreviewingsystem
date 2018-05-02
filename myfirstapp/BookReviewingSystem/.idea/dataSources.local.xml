@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="bookreview@localhost" uuid="20e98d82-a168-4a1b-a11f-dd9f4acd351f">
+      <database-info product="PostgreSQL" version="9.5.12" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>hoangtran92</user-name>
+      <introspection-schemas>bookreview:public</introspection-schemas>
+    </data-source>
+  </component>
+</project>
