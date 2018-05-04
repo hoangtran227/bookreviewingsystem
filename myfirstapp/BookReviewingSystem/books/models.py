@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -6,6 +8,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
@@ -18,3 +21,9 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+
+class Comments(models.Model):
+    comments = models.TextField()
+    created_by = models.ForeignKey(User, related_name='Comments', on_delete=models.CASCADE)
+    last_modified = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)

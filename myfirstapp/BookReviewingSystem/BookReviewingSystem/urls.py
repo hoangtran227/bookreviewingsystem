@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^settings/password/done/$',
         auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
         name='password_change_done'),
+    url(r'^books/(?P<pk>\d+)/comment/$', views.post_comments_controller, name='post_comment'),
     url(r'^books/(?P<pk>\d+)/$', views.book_detail, name='book_title'),
     url(r'^admin/', admin.site.urls),
 ]
