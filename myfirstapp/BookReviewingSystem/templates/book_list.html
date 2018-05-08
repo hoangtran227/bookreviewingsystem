@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Welcome to Book Reviewing System</li>
+{% endblock %}
+{% block javascript %}
+  <script src="{% static 'js/books.js' %}"></script>
+{% endblock %}
+{% block content %}
+      <h1 class="page-header">Books</h1>
+        <p>
+            <button type="button" class="btn btn-primary js-create-book" data-url="{% url 'book_create' %}">
+            <span class="glyphicon glyphicon-plus"></span>
+            New book
+            </button>
+        </p>
+  <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Publish_date</th>
+        <th>Page Number</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% include 'includes/partial_book_list.html' %}
+    </tbody>
+  </table>
+    <div class="modal fade" id="modal-book">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% for book in books %}
+  <tr>
+      <td><a href="{% url 'book_title' book.pk %}">{{ book.title }}</a></td>
+    <td>{{ book.author }}</td>
+    <td>{{ book.category.name}}</td>
+    <td>{{ book.publish_date }}</td>
+    <td>{{ book.page_number }}</td>
+    <td>{{ book.price }}</td>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">No book</td>
+  </tr>
+{% endfor %}

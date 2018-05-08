@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% block stylesheet %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
 {% block title %}
   {{ book.title }}
 {% endblock %}
 {% block breadcrumb %}
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Books</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'book_list' %}">Books</a></li>
         <li class="breadcrumb-item active">{{ book.title }}</li>
 {% endblock %}
 {% block content %}
     <div id="header">
-        <h1>{{ book.title }}</h1>
+        <h1 style="text-align: center">{{ book.title }} - {{ book.author }}</h1>
     </div>
     <div id="content">
         <p>{{ book.content }}</p>
     </div>
-    <div>
-        <input type="text" name="comment" style="width: 800px; height: 145px;">
-    </div>
-    <button type="submit" >Comment</button>
+    <button type="button">Like</button>
+    <button type="button">Mark as read</button>
+    <button type="button">Mark as favourite</button>
+    <hr>
+    <div><textarea name="Comment" cols="50" rows="5"></textarea></div>
+    <input type="submit" value="Comment">
 {% endblock %}
