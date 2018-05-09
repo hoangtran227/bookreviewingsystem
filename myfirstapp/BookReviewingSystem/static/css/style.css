@@ -1,6 +1,7 @@
 
 body *{
     font-family: Ubuntu;
+    background-image: url(../img/doodles.png);
 }
 
 h1, h2, h3, h4, h5{

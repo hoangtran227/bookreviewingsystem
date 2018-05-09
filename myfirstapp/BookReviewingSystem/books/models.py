@@ -19,13 +19,20 @@ class Book(models.Model):
     page_number = models.IntegerField(default=1)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(max_length=5000, default='This is content of the book')
+    ratings = models.ManyToManyField(User, through='BookRating')
+
+    class Meta:
+        db_table = 'book'
+
 
     def __str__(self):
         return self.title
 
 
-class Comments(models.Model):
-    comments = models.TextField()
-    created_by = models.ForeignKey(User, related_name='Comments', on_delete=models.CASCADE)
-    last_modified = models.DateTimeField(auto_now=True)
-    created_on = models.DateTimeField(auto_now_add=True)
+class BookRating(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.SmallIntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
+
+    class meta:
+        unique_together = ('book','user')

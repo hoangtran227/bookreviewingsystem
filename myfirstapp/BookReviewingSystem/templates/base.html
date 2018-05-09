@@ -29,8 +29,8 @@
             </div>
                 </li>
             </ul>
-        <form name="myform" method="GET" action="">
-            <input type="text" name="search" placeholder="Search" />
+        <form name="myform" method="GET" action="{% url 'search' %}">
+            <input type="text" name="search" placeholder="Search the book"  />
         </form>
            {% else %}
                 <form class="form-inline ml-auto">

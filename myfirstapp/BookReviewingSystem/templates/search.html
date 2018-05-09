@@ -1,29 +1,21 @@
 {% extends 'base.html' %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item active">Welcome to Book Reviewing System</li>
-{% endblock %}
-{% block content %}
-      <table class="table">
-        <thead class="thead-inverse">
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Category</th>
-          <th>Publish_date</th>
-          <th>Page Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for book in books %}
-          <tr>
-            <td><a href="{% url 'book_title' book.pk %}">{{ book.title }}</a></td>
-            <td class="align-middle">{{ book.author }}</td>
-            <td class="align-middle">{{ book.category.name }}</td>
-            <td class="align-middle">{{ book.publish_date }}</td>
-            <td class="align-middle">{{ book.page_number }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
+{% if books %}
+{% for book in books %}
+    <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Publish_date</th>
+        <th>Page Number</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% include 'includes/partial_book_list.html' %}
+    </tbody>
     </table>
-{% endblock %}
+{% endfor %}
+{% endif %}
