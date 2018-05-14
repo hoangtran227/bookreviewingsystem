@@ -1,7 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import Book
-from .form import BookForm
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Book, Comment
+from .form import BookForm, CommentForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.db.models import Q
@@ -57,5 +56,27 @@ def search(request):
         return render(request, "book_list.html", {})
 
 
+def add_comment_to_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.book = book
+            comment.save()
+            return redirect('book_detail', pk=book.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_book.html', {'form': form})
 
 
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('book_detail', pk=comment.book.pk)
+
+
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('book_detail', pk=comment.book.pk)

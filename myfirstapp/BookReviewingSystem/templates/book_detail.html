@@ -10,13 +10,23 @@
     <div id="header">
         <h1 style="text-align: center">{{ book.title }} - {{ book.author }}</h1>
     </div>
-    <div id="content">
+     <div id="content">
         <p>{{ book.content }}</p>
-    </div>
-    <button type="button">Like</button>
-    <button type="button">Mark as read</button>
-    <button type="button">Mark as favourite</button>
-    <hr>
-    <div><textarea name="Comment" cols="50" rows="5"></textarea></div>
-    <input type="submit" value="Comment">
+     </div>
+    <a class="btn btn-default" href="{% url 'add_comment_to_book' pk=book.pk %}">Add comment</a>
+    {% for comment in comments %}
+        {% if user.is_authenticated or comment.approved_comment %}
+        <div class="comment">
+            <div class="date">
+                {{ comment.time }}
+                {% if not comment.approved_comment %}
+                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                {% endif %}
+            </div>
+            <strong>{{ comment.user }}</strong>
+            <p>{{ comment.content|linebreaks }}</p>
+        </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

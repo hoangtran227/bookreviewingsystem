@@ -24,7 +24,6 @@ class Book(models.Model):
     class Meta:
         db_table = 'book'
 
-
     def __str__(self):
         return self.title
 
@@ -34,5 +33,26 @@ class BookRating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.SmallIntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
 
-    class meta:
-        unique_together = ('book','user')
+    class Meta:
+        unique_together = ('book', 'user')
+
+
+class Comment(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+    approved_comment = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'comments'
+
+    def approved_comments(self):
+        return self.approved_comment.filter(approved_comment=True)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.content

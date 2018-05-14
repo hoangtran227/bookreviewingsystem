@@ -1,6 +1,6 @@
 {% for book in books %}
   <tr>
-      <td><a href="{% url 'book_title' book.pk %}">{{ book.title }}</a></td>
+      <td><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></td>
     <td>{{ book.author }}</td>
     <td>{{ book.category.name}}</td>
     <td>{{ book.publish_date }}</td>

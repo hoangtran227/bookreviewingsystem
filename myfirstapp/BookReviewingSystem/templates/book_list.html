@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block breadcrumb %}
   <li class="breadcrumb-item active">Welcome to Book Reviewing System</li>
+  <form name="myform" method="GET" action="{% url 'search' %}">
+      <input type="text" name="search" placeholder="Search the book"  />
+  </form>
 {% endblock %}
 {% block javascript %}
   <script src="{% static 'js/books.js' %}"></script>
@@ -12,7 +14,7 @@
         <p>
             <button type="button" class="btn btn-primary js-create-book" data-url="{% url 'book_create' %}">
             <span class="glyphicon glyphicon-plus"></span>
-            New book
+                New book
             </button>
         </p>
   <table class="table" id="book-table">
