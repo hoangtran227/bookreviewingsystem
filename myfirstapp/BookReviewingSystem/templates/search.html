@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% if books %}
+{% for book in books %}
+    <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Publish_date</th>
+        <th>Page Number</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% include 'includes/partial_book_list.html' %}
+    </tbody>
+    </table>
+{% endfor %}
+{% endif %}

@@ -1,7 +1,14 @@
-from django.forms import ModelForm
-from .models import Comments
+from .models import Book, Comment
+from django import forms
 
-class CommentForm(ModelForm):
+
+class BookForm(forms.ModelForm):
     class Meta:
-        model = Comments
-        fields = ['comments']
+        model = Book
+        fields = ['title', 'publish_date', 'author', 'price', 'page_number', 'category']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['user', 'content']
